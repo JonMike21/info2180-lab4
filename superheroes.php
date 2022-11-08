@@ -1,5 +1,4 @@
 <?php
-
 $superheroes = [
   [
       "id" => 1,
@@ -70,3 +69,45 @@ $superheroes = [
   <li><?= $superhero['alias']; ?></li>
 <?php endforeach; ?>
 </ul>
+
+
+
+<?php  
+
+$hero = $_GET["name"]; 
+$x=0;
+  
+
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' or isset($_POST['name'])){
+    //echo "yes";
+    //echo $_POST['name='];
+    foreach ($superheroes as $superhero):
+        //echo "IT A WOK";
+        //echo "AKA ",$superhero["name"];
+        if (in_array($hero,$superhero))
+        {?>        
+            <h2><?= $superhero['alias']; ?> </h2>
+            <h4>AKA <?= $superhero['name']; ?></h4>
+            
+            <p><?=$superhero['biography'];?></p>
+        <?php 
+        $x=0;
+        break;
+        }    
+        else{$x++;}    
+        //echo $superhero['name'];         
+    endforeach;
+
+    if ($x>1)
+        {$x=0;
+        ?>        
+            <h4>SUPERHERO NOT FOUND</h4>
+        <?php}    
+
+    {?>
+        <ul>
+        </ul>
+    <?php }?>
+
+<?php } ?>
